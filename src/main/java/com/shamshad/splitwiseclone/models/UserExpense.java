@@ -1,7 +1,6 @@
 package com.shamshad.splitwiseclone.models;
 
 import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import jakarta.persistence.ManyToOne;
 import lombok.Getter;
@@ -10,14 +9,13 @@ import lombok.Setter;
 @Getter
 @Setter
 @Entity
-public class Expense extends BaseModel{
-    private String Description;
+public class UserExpense extends BaseModel{
     private int amount;
 
-    @Enumerated(EnumType.STRING)
-    private ExpenseType expenseType;
+    @Enumerated
+    private UserExpenseType userExpenseType;
     @ManyToOne
-    private Group group;
+    private User user;
     @ManyToOne
-    private User addedBy;
+    private Expense expense;
 }
