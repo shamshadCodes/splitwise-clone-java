@@ -39,8 +39,6 @@ public class UserService {
         user.setPhoneNumber(phoneNumber);
         user.setUserStatus(UserStatus.REGISTERED);
 
-        User savedUser = userRepository.save(user);
-
-        return savedUser;
+        return userRepository.save(user);
     }
 }
