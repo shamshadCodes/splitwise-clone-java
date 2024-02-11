@@ -10,7 +10,7 @@ import java.util.Arrays;
 import java.util.List;
 
 @Component
-public class RegisterCommand implements Command{
+public class RegisterNewUserCommand implements Command{
 //    Sample Command
 //    Register vinsmokesanji 003 namisswwaann
 //    u1 is registering with the username "vinsmokesanji", phone "003" and password as "namisswwaann"
@@ -18,7 +18,7 @@ public class RegisterCommand implements Command{
     UserController userController;
 
     @Autowired
-    public RegisterCommand(UserController userController) {
+    public RegisterNewUserCommand(UserController userController) {
         this.userController = userController;
     }
 
@@ -27,10 +27,7 @@ public class RegisterCommand implements Command{
         //TODO: Apply a check for leading zeroes or more than one zero between words
         List<String> inputKeywords = Arrays.stream(input.split(" ")).toList();
 
-        if(inputKeywords.size() == 4 && inputKeywords.get(0).equals(CommandKeywords.REGISTER_NEW_USER)){
-            return true;
-        }
-        return false;
+        return inputKeywords.size() == 4 && inputKeywords.get(0).equalsIgnoreCase(CommandKeywords.REGISTER_NEW_USER);
     }
 
     @Override
@@ -50,10 +47,10 @@ public class RegisterCommand implements Command{
         RegisterUserResponseDTO responseDTO = userController.registerUser(requestDTO);
 
         if(responseDTO.getStatus().equals("SUCCESS")){
-            System.out.printf("User with user id: %s created", responseDTO.getUserId());
+            System.out.printf("User with user id: %s created\n", responseDTO.getUserId());
         }
         else {
-            System.out.println("Unable to create user. Please try again");
+            System.out.println(responseDTO.getMessage());
         }
 
     }

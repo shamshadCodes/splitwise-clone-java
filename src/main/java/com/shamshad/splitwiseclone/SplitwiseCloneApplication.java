@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 
 import java.util.Scanner;
 
@@ -23,11 +24,17 @@ public class SplitwiseCloneApplication implements CommandLineRunner {
     }
 
     @Override
-    public void run(String... args) throws Exception {
-
+    public void run(String... args){
+        System.out.println("/n**********Application is running**********");
         while(true){
-            System.out.println("\nPlease enter the next command");
+            System.out.print("""
+                            Please enter the next command\s
+                            ->\s""");
             String input = scanner.nextLine();
+            if(input.equalsIgnoreCase("EXIT")){
+                System.out.println("EXITING NOW!");
+                break;
+            }
 
             commandRegistry.execute(input);
         }

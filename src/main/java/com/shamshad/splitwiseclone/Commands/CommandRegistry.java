@@ -11,17 +11,21 @@ public class CommandRegistry {
     List<Command> commands;
 
     @Autowired
-    public CommandRegistry(RegisterCommand registerCommand) {
+    public CommandRegistry(RegisterNewUserCommand registerNewUserCommand) {
         commands = new ArrayList<>();
-        commands.add(registerCommand);
+        commands.add(registerNewUserCommand);
     }
 
-    public void execute(String input){
+    public void execute(String input) {
+        boolean flag = false;
         for(Command command: commands){
             if(command.matches(input)){
                 command.execute(input);
+                flag = true;
                 break;
             }
         }
+        if(!flag)
+            System.out.println("Invalid Command. Please try again.");
     }
 }

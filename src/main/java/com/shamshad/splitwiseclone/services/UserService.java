@@ -38,7 +38,9 @@ public class UserService {
         user.setPassword(password);
         user.setPhoneNumber(phoneNumber);
         user.setUserStatus(UserStatus.REGISTERED);
-        userRepository.save(user);
-        return user;
+
+        User savedUser = userRepository.save(user);
+
+        return savedUser;
     }
 }
