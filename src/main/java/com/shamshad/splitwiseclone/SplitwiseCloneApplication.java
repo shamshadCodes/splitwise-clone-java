@@ -10,6 +10,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 import java.util.Scanner;
 
 @SpringBootApplication
+@EnableJpaAuditing
 public class SplitwiseCloneApplication implements CommandLineRunner {
     CommandRegistry commandRegistry;
     Scanner scanner = new Scanner(System.in);
