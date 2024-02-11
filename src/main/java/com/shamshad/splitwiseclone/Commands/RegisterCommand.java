@@ -1,5 +1,9 @@
 package com.shamshad.splitwiseclone.Commands;
 
+import com.shamshad.splitwiseclone.controllers.UserController;
+import com.shamshad.splitwiseclone.dtos.RegisterUserRequestDTO;
+import com.shamshad.splitwiseclone.dtos.RegisterUserResponseDTO;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.Arrays;
@@ -10,6 +14,13 @@ public class RegisterCommand implements Command{
 //    Sample Command
 //    Register vinsmokesanji 003 namisswwaann
 //    u1 is registering with the username "vinsmokesanji", phone "003" and password as "namisswwaann"
+
+    UserController userController;
+
+    @Autowired
+    public RegisterCommand(UserController userController) {
+        this.userController = userController;
+    }
 
     @Override
     public boolean matches(String input) {
@@ -28,9 +39,22 @@ public class RegisterCommand implements Command{
         List<String> inputKeywords = Arrays.stream(input.split(" ")).toList();
 
         String username = inputKeywords.get(1);
-        String userId = inputKeywords.get(2);
+        String phoneNumber = inputKeywords.get(2);
         String password = inputKeywords.get(3);
 
+        RegisterUserRequestDTO requestDTO = new RegisterUserRequestDTO();
+        requestDTO.setUsername(username);
+        requestDTO.setPhoneNumber(phoneNumber);
+        requestDTO.setPassword(password);
+
+        RegisterUserResponseDTO responseDTO = userController.registerUser(requestDTO);
+
+        if(responseDTO.getStatus().equals("SUCCESS")){
+            System.out.printf("User with user id: %s created", responseDTO.getUserId());
+        }
+        else {
+            System.out.println("Unable to create user. Please try again");
+        }
 
     }
 }

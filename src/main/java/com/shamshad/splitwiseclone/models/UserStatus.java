@@ -1,6 +1,6 @@
 package com.shamshad.splitwiseclone.models;
 
-public enum UserType {
+public enum UserStatus {
     REGISTERED,
-    UNREGISTERED,
+    INVITED,
 }

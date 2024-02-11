@@ -26,7 +26,7 @@ public class SplitwiseCloneApplication implements CommandLineRunner {
     public void run(String... args) throws Exception {
 
         while(true){
-            System.out.println("Please enter the next command");
+            System.out.println("\nPlease enter the next command");
             String input = scanner.nextLine();
 
             commandRegistry.execute(input);

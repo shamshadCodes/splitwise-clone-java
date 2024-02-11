@@ -10,12 +10,12 @@ import java.util.List;
 @Setter
 @Entity(name = "users")
 public class User extends BaseModel{
-    private String name;
+    private String username;
     private String password;
     private String phoneNumber;
 
     @Enumerated(EnumType.STRING)
-    private UserType userType;
+    private UserStatus userStatus;
     @ManyToMany
     private List<Group> groups;
 }
